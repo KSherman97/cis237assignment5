@@ -72,7 +72,7 @@ namespace assignment1
                         decimal newPriceInformation = userInterface.GetNewPriceInformation();
                         bool newActiveInformation = userInterface.GetNewActiveInformation();
 
-
+                        /**
                         if (beverageCollection.FindById(newItemInformation[0]) == null)
                         {
                             //beverageCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
@@ -80,6 +80,17 @@ namespace assignment1
                             userInterface.DisplayAddWineItemSuccess();
                         }
                         else
+                        {
+                            userInterface.DisplayItemAlreadyExistsError();
+                        }
+                        **/
+
+                        try
+                        {
+                            beverageCollection.AddToDatabase(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
+                            userInterface.DisplayAddWineItemSuccess();
+                        }
+                        catch
                         {
                             userInterface.DisplayItemAlreadyExistsError();
                         }
