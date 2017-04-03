@@ -21,6 +21,10 @@ namespace assignment1
     {
         static void Main(string[] args)
         {
+            Console.BufferHeight = Int16.MaxValue - 1;  // resets the console bufferhieght to allow the entire file
+                                                        // to be read into a single console window
+            Console.SetWindowSize(200, 30);             // resizes the window to fit the special output formatting
+
             //Set a constant for the size of the collection
             const int wineItemCollectionSize = 4000;
 
@@ -31,7 +35,7 @@ namespace assignment1
             UserInterface userInterface = new UserInterface();
 
             //Create an instance of the WineItemCollection class
-            IWineCollection wineItemCollection = new BeverageCollection(wineItemCollectionSize);
+            BeverageCollection beverageCollection = new BeverageCollection(wineItemCollectionSize);
 
             //Create an instance of the CSVProcessor class
             CSVProcessor csvProcessor = new CSVProcessor();
@@ -49,7 +53,8 @@ namespace assignment1
                 {
                     case 1:
                         //Load the CSV File
-                        bool success = csvProcessor.ImportCSV(wineItemCollection, pathToCSVFile);
+                        //bool success = csvProcessor.ImportCSV(beverageCollection, pathToCSVFile);
+                        /**
                         if (success)
                         {
                             //Display Success Message
@@ -60,11 +65,21 @@ namespace assignment1
                             //Display Fail Message
                             userInterface.DisplayImportError();
                         }
+                        **/
+                        try
+                        {
+                            beverageCollection.processLine();
+                            userInterface.DisplayImportSuccess();
+                        }
+                        catch
+                        {
+                            userInterface.DisplayImportError();
+                        }
                         break;
 
                     case 2:
                         //Print Entire List Of Items
-                        string[] allItems = wineItemCollection.GetPrintStringsForAllItems();
+                        string[] allItems = beverageCollection.GetPrintStringsForAllItems();
                         if (allItems.Length > 0)
                         {
                             //Display all of the items
@@ -80,7 +95,7 @@ namespace assignment1
                     case 3:
                         //Search For An Item
                         string searchQuery = userInterface.GetSearchQuery();
-                        string itemInformation = wineItemCollection.FindById(searchQuery);
+                        string itemInformation = beverageCollection.FindById(searchQuery);
                         if (itemInformation != null)
                         {
                             userInterface.DisplayItemFound(itemInformation);
@@ -94,9 +109,14 @@ namespace assignment1
                     case 4:
                         //Add A New Item To The List
                         string[] newItemInformation = userInterface.GetNewItemInformation();
-                        if (wineItemCollection.FindById(newItemInformation[0]) == null)
+                        decimal newPriceInformation = userInterface.GetNewPriceInformation();
+                        bool newActiveInformation = userInterface.GetNewActiveInformation();
+
+
+                        if (beverageCollection.FindById(newItemInformation[0]) == null)
                         {
-                            wineItemCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2]);
+                            beverageCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
+                            beverageCollection.AddToDatabase(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
                             userInterface.DisplayAddWineItemSuccess();
                         }
                         else

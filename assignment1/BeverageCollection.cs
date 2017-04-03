@@ -9,25 +9,61 @@ using System.Threading.Tasks;
 
 namespace assignment1
 {
-    class BeverageCollection : IWineCollection
+    class BeverageCollection
     {
         //Private Variables
-        BeverageItem[] wineItems;
+        Beverages[] beverage;
         int wineItemsLength;
+
+        BeverageKShermanEntities BeverageEntities = new BeverageKShermanEntities();
+        //Console.WriteLine("Print the list");
 
         //Constuctor. Must pass the size of the collection.
         public BeverageCollection(int size)
         {
-            wineItems = new BeverageItem[size];
+            beverage = new Beverages[size];
             wineItemsLength = 0;
         }
 
+        public void processLine()
+        {
+            foreach (Beverage beverage in BeverageEntities.Beverages)
+            {
+                AddNewItem(beverage.id, beverage.name, beverage.pack, beverage.price, beverage.active);
+            }
+        }
+
         //Add a new item to the collection
-        public void AddNewItem(string id, string description, string pack)
+        public void AddNewItem(string id, string description, string pack, decimal price, bool active)
         {
             //Add a new WineItem to the collection. Increase the Length variable.
-            wineItems[wineItemsLength] = new BeverageItem(id, description, pack);
+            beverage[wineItemsLength] = new Beverages(id, description, pack, price, active);
+            
             wineItemsLength++;
+        }
+
+        public void AddToDatabase(string id, string description, string pack, decimal price, bool active)
+        {
+            Beverage newBeverageToAdd = new Beverage();
+            newBeverageToAdd.id = id;
+            newBeverageToAdd.name = description;
+            newBeverageToAdd.pack = pack;
+            newBeverageToAdd.price = price;
+            newBeverageToAdd.active = active;
+
+            try
+            {
+                BeverageEntities.Beverages.Add(newBeverageToAdd);
+                BeverageEntities.SaveChanges();
+                Console.WriteLine("Done.");
+            }
+            catch(Exception e)
+            {
+                // remove the new car from the cars collection since we cant save it
+                BeverageEntities.Beverages.Remove(newBeverageToAdd);
+                Console.WriteLine("Can't add the record. Already have one with that primary key");
+            }
+
         }
         
         //Get The Print String Array For All Items
@@ -42,13 +78,13 @@ namespace assignment1
             if (wineItemsLength > 0)
             {
                 //For each item in the collection
-                foreach (BeverageItem wineItem in wineItems)
+                foreach (Beverages beverageItem in beverage)
                 {
                     //if the current item is not null.
-                    if (wineItem != null)
+                    if (beverageItem != null)
                     {
                         //Add the results of calling ToString on the item to the string array.
-                        allItemStrings[counter] = wineItem.ToString();
+                        allItemStrings[counter] = beverageItem.ToString();
                         counter++;
                     }
                 }
@@ -64,16 +100,16 @@ namespace assignment1
             string returnString = null;
 
             //For each WineItem in wineItems
-            foreach (BeverageItem wineItem in wineItems)
+            foreach (Beverages beverageItem in beverage)
             {
                 //If the wineItem is not null
-                if (wineItem != null)
+                if (beverageItem != null)
                 {
                     //if the wineItem Id is the same as the search id
-                    if (wineItem.Id == id)
+                    if (beverageItem.Id == id)
                     {
                         //Set the return string to the result of the wineItem's ToString method
-                        returnString = wineItem.ToString();
+                        returnString = beverageItem.ToString();
                     }
                 }
             }

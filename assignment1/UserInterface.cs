@@ -73,8 +73,32 @@ namespace assignment1
             Console.WriteLine("What is the new items Pack?");
             Console.Write("> ");
             string pack = Console.ReadLine();
+            
 
             return new string[] { id, description, pack };
+        }
+
+        public decimal GetNewPriceInformation()
+        {
+            Console.WriteLine("What is the new items Price?");
+            Console.Write("> ");
+            decimal price = decimal.Parse(Console.ReadLine());
+
+            return price;
+        }
+
+        public bool GetNewActiveInformation()
+        {
+            Console.WriteLine("Active: 1) yes 2) no?");
+            Console.Write("> ");
+            bool activeState = true;
+            string active = Console.ReadLine();
+            if (active == "1")
+                activeState = true;
+            if (active == "2")
+                activeState = false;
+
+            return activeState;
         }
 
         //Display Import Success

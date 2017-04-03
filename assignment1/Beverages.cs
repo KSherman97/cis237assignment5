@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace assignment1
 {
-    class BeverageItem
+    class Beverages
     {
         //Private Class Level Variables
         private string id;
         private string description;
         private string pack;
+        private decimal price;
+        private bool active;
 
         //Public Property to Get the Id
         public string Id
@@ -26,20 +28,22 @@ namespace assignment1
         }
 
         //Default Constuctor
-        public BeverageItem() { }
+        public Beverages() { }
 
         //3 Parameter Constructor
-        public BeverageItem(string id, string description, string pack)
+        public Beverages(string id, string description, string pack, decimal  price, bool active)
         {
             this.id = id;
             this.description = description;
             this.pack = pack;
+            this.price = price;
+            this.active = active;
         }
 
         //Override ToString Method to concatenate the fields together.
         public override string ToString()
         {
-            return "Id: " + id + ", Description: " + description + ", Pack: " + pack;
+            return "Id: " + id + ", Description: " + description + ", Pack: " + pack + ", Price: " + price.ToString("c") + ", Active: " + active;
         }
 
 
