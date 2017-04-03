@@ -105,6 +105,14 @@ namespace assignment1
             return price;
         }
 
+        public string RemoveByID()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Enter the ID of the wine you would like to remove: ");
+            Console.Write("> ");
+            return Console.ReadLine();
+        }
+
         public bool GetNewActiveInformation()
         {
             Console.WriteLine("Active: 1) yes 2) no?");

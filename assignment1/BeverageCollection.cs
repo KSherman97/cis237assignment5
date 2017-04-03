@@ -11,6 +11,8 @@ namespace assignment1
 {
     class BeverageCollection
     {
+        UserInterface userInterface = new UserInterface();
+
         //Private Variables
         Beverages[] beverage;
         int wineItemsLength;
@@ -80,28 +82,11 @@ namespace assignment1
             //Declare return string for the possible found item
             string returnString = null;
 
-            /** //For each WineItem in wineItems
-             foreach (Beverages beverageItem in beverage)
-             {
-                 //If the wineItem is not null
-                 if (beverageItem != null)
-                 {
-                     //if the wineItem Id is the same as the search id
-                     if (beverageItem.Id == id)
-                     {
-                         //Set the return string to the result of the wineItem's ToString method
-                         returnString = beverageItem.ToString();
-                     }
-                 }
-             }
-             **/
-
             Beverage foundBeverage = BeverageEntities.Beverages.Find(id);
-            Console.WriteLine(Environment.NewLine + "=============== FIND BY ID ===============");
             if (foundBeverage == null)
-                Console.WriteLine("That model doesn't exist");
+                userInterface.DisplayItemFoundError();
             else
-                Console.WriteLine(foundBeverage.id + " " + foundBeverage.name + " " + foundBeverage.pack + " " + foundBeverage.price + " " + foundBeverage.active);
+                Console.WriteLine("Id: " + foundBeverage.id + ", Description: " + foundBeverage.name + ", Pack: " + foundBeverage.pack + ", Price: " + foundBeverage.price.ToString("c") + ", Active: " + foundBeverage.active + Environment.NewLine);
 
             //Return the returnString
             return returnString;
@@ -140,6 +125,10 @@ namespace assignment1
                 // back into the cars collection. it is still there.
                 // all we have to do is save the changes.
                 BeverageEntities.SaveChanges();
+            }
+            else
+            {
+                userInterface.DisplayItemFoundError();
             }
 
         }

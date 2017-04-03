@@ -63,13 +63,7 @@ namespace assignment1
                         string searchQuery = userInterface.GetSearchQuery();
                         string itemInformation = beverageCollection.FindById(searchQuery);
                         if (itemInformation != null)
-                        {
-                            userInterface.DisplayItemFound(itemInformation);
-                        }
-                        else
-                        {
-                            userInterface.DisplayItemFoundError();
-                        }
+                        userInterface.DisplayItemFound(itemInformation);
                         break;
 
                     case 3:
@@ -81,7 +75,7 @@ namespace assignment1
 
                         if (beverageCollection.FindById(newItemInformation[0]) == null)
                         {
-                            beverageCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
+                            //beverageCollection.AddNewItem(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
                             beverageCollection.AddToDatabase(newItemInformation[0], newItemInformation[1], newItemInformation[2], newPriceInformation, newActiveInformation);
                             userInterface.DisplayAddWineItemSuccess();
                         }
@@ -92,11 +86,21 @@ namespace assignment1
                         break;
 
                     case 4:
-                        beverageCollection.RemoveByID("12345");
+                        // remove an item
+                        string IDToRemove = userInterface.RemoveByID();
+                        itemInformation = beverageCollection.FindById(IDToRemove);
+                        if (itemInformation != null)
+                        {
+                            beverageCollection.RemoveByID(IDToRemove);
+                        }
+                        else
+                        {
+                            userInterface.DisplayItemFoundError();
+                        }
                         break;
 
                     case 5:
-                        //Add A New Item To The List
+                        //update an Item on The List
                         string[] updateBeverageInformation = userInterface.GetUpdateItemInformation();
                         decimal updatePriceInformation = userInterface.GetNewPriceInformation();
                         bool updateActiveInformation = userInterface.GetNewActiveInformation();
@@ -105,6 +109,8 @@ namespace assignment1
                         if (beverageCollection.FindById(updateBeverageInformation[0]) != null)
                         {
                             beverageCollection.updateBeverage(updateBeverageInformation[0], updateBeverageInformation[1], updateBeverageInformation[2], updatePriceInformation, updateActiveInformation);
+                            //beverageCollection.updateBeverage("12345", "1", "1", 1, true);
+
                             userInterface.DisplayAddWineItemSuccess();
                         }
                         else
