@@ -63,7 +63,7 @@ namespace assignment1
                         string searchQuery = userInterface.GetSearchQuery();
                         string addItemInformation = beverageCollection.FindById(searchQuery);
                         if (addItemInformation != null)
-                        userInterface.DisplayItemFound(addItemInformation);
+                            userInterface.DisplayItemFound(addItemInformation);
                         break;
 
                     case 3:
@@ -100,11 +100,14 @@ namespace assignment1
                         // remove an item
                         string IDToRemove = userInterface.RemoveByID();
                         string removeItemInformation = beverageCollection.FindById(IDToRemove);
-                        if (removeItemInformation != null)
+
+                        // try catch, fails if the beverage is null 
+
+                        try
                         {
                             beverageCollection.RemoveByID(IDToRemove);
                         }
-                        else
+                        catch (Exception e)
                         {
                             userInterface.DisplayItemFoundError();
                         }
@@ -122,7 +125,7 @@ namespace assignment1
                         }
                         catch
                         {
-                            userInterface.DisplayImportError();
+                            userInterface.DisplayItemFoundError();
                         }
 
                         //if (beverageCollection.FindById(updateBeverageInformation[0]) != null)

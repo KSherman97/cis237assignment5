@@ -39,15 +39,17 @@ namespace assignment1
             wineItemsLength++;
         }
 
+        // add to database
         public void AddToDatabase(string id, string description, string pack, decimal price, bool active)
         {
             Beverage newBeverageToAdd = new Beverage();
-            newBeverageToAdd.id = id;
-            newBeverageToAdd.name = description;
-            newBeverageToAdd.pack = pack;
-            newBeverageToAdd.price = price;
-            newBeverageToAdd.active = active;
+            newBeverageToAdd.id = id;               // assigns the user input to the id value
+            newBeverageToAdd.name = description;    // assigns the user input to the name value
+            newBeverageToAdd.pack = pack;           // assigns the user input to the pack value
+            newBeverageToAdd.price = price;         // assigns the user input to the price value
+            newBeverageToAdd.active = active;       // assigns the user input to the active value
 
+            // try catch, fails if the beverage is null 
             try
             {
                 BeverageEntities.Beverages.Add(newBeverageToAdd);
@@ -68,6 +70,7 @@ namespace assignment1
         {
             string output = string.Empty;
 
+            // foreach loops through each item in the beverage.Entities from the database
             foreach (Beverage beverageItem in BeverageEntities.Beverages)
             {
                 output += "Id: " + beverageItem.id + ", Description: " + beverageItem.name + ", Pack: " + beverageItem.pack + ", Price: " + beverageItem.price.ToString("c") + ", Active: " + beverageItem.active + Environment.NewLine;
@@ -97,12 +100,10 @@ namespace assignment1
             Beverage carToFindForDelete = BeverageEntities.Beverages.Find(id);
 
             // remove the car fron the cars collection
-            if (carToFindForDelete != null)
-            {
+            // then save the changes made to the database
                 carToFindForDelete = BeverageEntities.Beverages.Find(carToFindForDelete.id);
                 BeverageEntities.Beverages.Remove(carToFindForDelete);
                 BeverageEntities.SaveChanges();
-            }
         }
 
         public void updateBeverage(string id, string description, string pack, decimal price, bool active)
