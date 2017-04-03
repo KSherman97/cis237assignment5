@@ -19,11 +19,6 @@ namespace assignment1
         //Console.WriteLine("Print the list");
 
         //Constuctor. Must pass the size of the collection.
-        public BeverageCollection(int size)
-        {
-            beverage = new Beverages[size];
-            wineItemsLength = 0;
-        }
 
         public void processLine()
         {
@@ -120,14 +115,8 @@ namespace assignment1
             if (carToFindForDelete != null)
             {
                 carToFindForDelete = BeverageEntities.Beverages.Find(carToFindForDelete.id);
-                //Console.WriteLine(carToFindForDelete.id + " " + carToFindForDelete.name + " " + carToFindForDelete.pack + " " + carToFindForDelete.price + " " + carToFindForDelete.active);
                 BeverageEntities.Beverages.Remove(carToFindForDelete);
                 BeverageEntities.SaveChanges();
-                Console.WriteLine("Just removed a car.");
-            }
-            else
-            {
-                Console.WriteLine("That car doesn't exist");
             }
         }
 
@@ -139,6 +128,7 @@ namespace assignment1
             // all of them if we don't want to
             if (beverageToFindForUpdate != null)
             {
+                beverageToFindForUpdate = BeverageEntities.Beverages.Find(beverageToFindForUpdate.id);
                 beverageToFindForUpdate.name = description;
                 beverageToFindForUpdate.pack = pack;
                 beverageToFindForUpdate.price = price;

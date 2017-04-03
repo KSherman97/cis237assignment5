@@ -25,20 +25,11 @@ namespace assignment1
                                                         // to be read into a single console window
             Console.SetWindowSize(200, 30);             // resizes the window to fit the special output formatting
 
-            //Set a constant for the size of the collection
-            const int wineItemCollectionSize = 4000;
-
-            //Set a constant for the path to the CSV File
-            const string pathToCSVFile = "../../../datafiles/winelist.csv";
-
             //Create an instance of the UserInterface class
             UserInterface userInterface = new UserInterface();
 
             //Create an instance of the WineItemCollection class
-            BeverageCollection beverageCollection = new BeverageCollection(wineItemCollectionSize);
-
-            //Create an instance of the CSVProcessor class
-            CSVProcessor csvProcessor = new CSVProcessor();
+            BeverageCollection beverageCollection = new BeverageCollection();
 
             //Display the Welcome Message to the user
             userInterface.DisplayWelcomeGreeting();
@@ -52,8 +43,6 @@ namespace assignment1
                 switch (choice)
                 {
                     case 1:
-                        //Load the CSV File
-                        //bool success = csvProcessor.ImportCSV(beverageCollection, pathToCSVFile);
                         /**
                         if (success)
                         {
