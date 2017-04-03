@@ -75,7 +75,7 @@ namespace assignment1
                 output += "Id: " + beverageItem.id + ", Description: " + beverageItem.name + ", Pack: " + beverageItem.pack + ", Price: " + beverageItem.price.ToString("c") + ", Active: " + beverageItem.active + Environment.NewLine;
             }
 
-            return output;
+            return output;  // return the concatinated string of beverages
 
         }
         //Find an item by it's Id
@@ -84,7 +84,12 @@ namespace assignment1
             //Declare return string for the possible found item
             string returnString = null;
 
+            // assign the found beverage as the result of the ID search 
             Beverage foundBeverage = BeverageEntities.Beverages.Find(id);
+
+            // if the beverage returned is null
+            // display the error
+            // if not then display the concatinated output
             if (foundBeverage == null)
                 userInterface.DisplayItemFoundError();
             else
@@ -114,22 +119,22 @@ namespace assignment1
             // all of them if we don't want to
             if (beverageToFindForUpdate != null)
             {
-                beverageToFindForUpdate = BeverageEntities.Beverages.Find(beverageToFindForUpdate.id);
-                beverageToFindForUpdate.name = description;
-                beverageToFindForUpdate.pack = pack;
-                beverageToFindForUpdate.price = price;
-                beverageToFindForUpdate.active = active;
+                beverageToFindForUpdate = BeverageEntities.Beverages.Find(beverageToFindForUpdate.id); // assigns the user input to the id value
+                beverageToFindForUpdate.name = description; // assigns the user input to the name value
+                beverageToFindForUpdate.pack = pack;        // assigns the user input to the pack value
+                beverageToFindForUpdate.price = price;      // assigns the user input to the price value
+                beverageToFindForUpdate.active = active;    // assigns the user input to the actice value
 
                 // save the new updates to the database. Since when we pulled out the one 
                 // to update, all we were really doing was getting a reference to the one in
                 // the collection we wanted to update, there is no need ot 'put' the beverage
-                // back into the cars collection. it is still there.
+                // back into the beverage collection. it is still there.
                 // all we have to do is save the changes.
                 BeverageEntities.SaveChanges();
             }
             else
             {
-                userInterface.DisplayItemFoundError();
+                userInterface.DisplayItemFoundError();      // display an error if beverage is null
             }
 
         }
