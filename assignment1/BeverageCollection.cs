@@ -20,7 +20,6 @@ namespace assignment1
         BeverageKShermanEntities BeverageEntities = new BeverageKShermanEntities();
         //Console.WriteLine("Print the list");
 
-        //Constuctor. Must pass the size of the collection.
 
         public void processLine()
         {
@@ -58,7 +57,7 @@ namespace assignment1
             }
             catch(Exception e)
             {
-                // remove the new car from the cars collection since we cant save it
+                // remove the new beverage from the cars collection since we cant save it
                 BeverageEntities.Beverages.Remove(newBeverageToAdd);
                 Console.WriteLine("Can't add the record. Already have one with that primary key");
             }
@@ -97,12 +96,13 @@ namespace assignment1
 
         public void RemoveByID(string id)
         {
-            Beverage carToFindForDelete = BeverageEntities.Beverages.Find(id);
+            // assigns the search value's return to the beverage for deletion
+            Beverage beverageToFindForDelete = BeverageEntities.Beverages.Find(id);
 
-            // remove the car fron the cars collection
+            // remove the beverage fron the beverage collection
             // then save the changes made to the database
-                carToFindForDelete = BeverageEntities.Beverages.Find(carToFindForDelete.id);
-                BeverageEntities.Beverages.Remove(carToFindForDelete);
+            beverageToFindForDelete = BeverageEntities.Beverages.Find(beverageToFindForDelete.id);
+                BeverageEntities.Beverages.Remove(beverageToFindForDelete);
                 BeverageEntities.SaveChanges();
         }
 
@@ -110,7 +110,7 @@ namespace assignment1
         {
             Beverage beverageToFindForUpdate = BeverageEntities.Beverages.Find(id);
 
-            // update some of the properties of the car we found
+            // update some of the properties of the beverage we found
             // all of them if we don't want to
             if (beverageToFindForUpdate != null)
             {
@@ -122,7 +122,7 @@ namespace assignment1
 
                 // save the new updates to the database. Since when we pulled out the one 
                 // to update, all we were really doing was getting a reference to the one in
-                // the collection we wanted to update, there is no need ot 'put' the car
+                // the collection we wanted to update, there is no need ot 'put' the beverage
                 // back into the cars collection. it is still there.
                 // all we have to do is save the changes.
                 BeverageEntities.SaveChanges();
