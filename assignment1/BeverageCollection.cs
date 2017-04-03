@@ -14,29 +14,29 @@ namespace assignment1
         UserInterface userInterface = new UserInterface();
 
         //Private Variables
-        Beverages[] beverage;
-        int wineItemsLength;
-
+        private Beverages[] beverage;
         BeverageKShermanEntities BeverageEntities = new BeverageKShermanEntities();
+
+        //int wineItemsLength;
+
         //Console.WriteLine("Print the list");
 
-
-        public void processLine()
-        {
-            foreach (Beverage beverage in BeverageEntities.Beverages)
-            {
-                AddNewItem(beverage.id, beverage.name, beverage.pack, beverage.price, beverage.active);
-            }
-        }
+        //public void processLine()
+        //{
+        //    foreach (Beverage beverage in BeverageEntities.Beverages)
+        //    {
+        //        AddNewItem(beverage.id, beverage.name, beverage.pack, beverage.price, beverage.active);
+        //    }
+        //}
 
         //Add a new item to the collection
-        public void AddNewItem(string id, string description, string pack, decimal price, bool active)
-        {
-            //Add a new WineItem to the collection. Increase the Length variable.
-            beverage[wineItemsLength] = new Beverages(id, description, pack, price, active);
-            
-            wineItemsLength++;
-        }
+        //public void AddNewItem(string id, string description, string pack, decimal price, bool active)
+        //{
+        //    //Add a new WineItem to the collection. Increase the Length variable.
+        //    beverage[wineItemsLength] = new Beverages(id, description, pack, price, active);
+
+        //    wineItemsLength++;
+        //}
 
         // add to database
         public void AddToDatabase(string id, string description, string pack, decimal price, bool active)
@@ -49,6 +49,7 @@ namespace assignment1
             newBeverageToAdd.active = active;       // assigns the user input to the active value
 
             // try catch, fails if the beverage is null 
+            // adds a new beverage to the database then saves it
             try
             {
                 BeverageEntities.Beverages.Add(newBeverageToAdd);
@@ -67,7 +68,8 @@ namespace assignment1
         //Get The Print String Array For All Items
         public string GetPrintStringsForAllItems()
         {
-            string output = string.Empty;
+            string output = string.Empty; // makes sure that each time we read in the database
+            // the string is empty / reset first
 
             // foreach loops through each item in the beverage.Entities from the database
             foreach (Beverage beverageItem in BeverageEntities.Beverages)
