@@ -62,7 +62,6 @@ Solution Requirements:
 ### Notes
 
 
-
 ## Grading
 | Feature                                 | Points |
 |-----------------------------------------|--------|
@@ -81,5 +80,7 @@ Solution Requirements:
 | Total                                   | 100    |
 
 ## Outside Resources Used
+none
 
 ## Known Problems, Issues, And/Or Errors in the Program
+No known issues
