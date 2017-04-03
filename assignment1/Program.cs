@@ -124,6 +124,15 @@ namespace assignment1
                             userInterface.DisplayItemAlreadyExistsError();
                         }
                         break;
+                    case 5:
+                        break;
+
+                    case 6:
+                        beverageCollection.RemoveByID("12345");
+                        break;
+
+                    case 7:
+                        break;
                 }
 
                 //Get the new choice of what to do from the user

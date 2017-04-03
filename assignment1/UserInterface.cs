@@ -11,7 +11,7 @@ namespace assignment1
 {
     class UserInterface
     {
-        const int maxMenuChoice = 5;
+        const int maxMenuChoice = 7;
         //---------------------------------------------------
         //Public Methods
         //---------------------------------------------------
@@ -177,6 +177,8 @@ namespace assignment1
             Console.WriteLine("3. Search For An Item");
             Console.WriteLine("4. Add New Item To The List");
             Console.WriteLine("5. Exit Program");
+            Console.WriteLine("6. Remove From List");
+            Console.WriteLine("7. Update");
         }
 
         //Display the Prompt

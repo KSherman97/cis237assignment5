@@ -78,14 +78,15 @@ namespace assignment1
             if (wineItemsLength > 0)
             {
                 //For each item in the collection
-                foreach (Beverages beverageItem in beverage)
+                foreach (Beverage beverageItem in BeverageEntities.Beverages)
                 {
                     //if the current item is not null.
                     if (beverageItem != null)
                     {
                         //Add the results of calling ToString on the item to the string array.
-                        allItemStrings[counter] = beverageItem.ToString();
+                        allItemStrings[counter] = ("Id: " + beverageItem.id + ", Description: " + beverageItem.name + ", Pack: " + beverageItem.pack + ", Price: " + beverageItem.price.ToString("c") + ", Active: " + beverageItem.active);
                         counter++;
+
                     }
                 }
             }
@@ -99,22 +100,50 @@ namespace assignment1
             //Declare return string for the possible found item
             string returnString = null;
 
-            //For each WineItem in wineItems
-            foreach (Beverages beverageItem in beverage)
-            {
-                //If the wineItem is not null
-                if (beverageItem != null)
-                {
-                    //if the wineItem Id is the same as the search id
-                    if (beverageItem.Id == id)
-                    {
-                        //Set the return string to the result of the wineItem's ToString method
-                        returnString = beverageItem.ToString();
-                    }
-                }
-            }
+            /** //For each WineItem in wineItems
+             foreach (Beverages beverageItem in beverage)
+             {
+                 //If the wineItem is not null
+                 if (beverageItem != null)
+                 {
+                     //if the wineItem Id is the same as the search id
+                     if (beverageItem.Id == id)
+                     {
+                         //Set the return string to the result of the wineItem's ToString method
+                         returnString = beverageItem.ToString();
+                     }
+                 }
+             }
+             **/
+
+            Beverage foundBeverage = BeverageEntities.Beverages.Find(id);
+            Console.WriteLine(Environment.NewLine + "=============== FIND BY ID ===============");
+            if (foundBeverage == null)
+                Console.WriteLine("That model doesn't exist");
+            else
+                Console.WriteLine(foundBeverage.id + " " + foundBeverage.name + " " + foundBeverage.pack + " " + foundBeverage.price + " " + foundBeverage.active);
+
             //Return the returnString
             return returnString;
+        }
+
+        public void RemoveByID(string id)
+        {
+            Beverage carToFindForDelete = BeverageEntities.Beverages.Find(id);
+
+            // remove the car fron the cars collection
+            if (carToFindForDelete != null)
+            {
+                carToFindForDelete = BeverageEntities.Beverages.Find(carToFindForDelete.id);
+                //Console.WriteLine(carToFindForDelete.id + " " + carToFindForDelete.name + " " + carToFindForDelete.pack + " " + carToFindForDelete.price + " " + carToFindForDelete.active);
+                BeverageEntities.Beverages.Remove(carToFindForDelete);
+                BeverageEntities.SaveChanges();
+                Console.WriteLine("Just removed a car.");
+            }
+            else
+            {
+                Console.WriteLine("That car doesn't exist");
+            }
         }
 
     }
