@@ -1,4 +1,4 @@
-﻿//Author: David Barnes
+﻿//Author: Kyle Sherman
 //CIS 237
 //Assignment 1
 using System;
