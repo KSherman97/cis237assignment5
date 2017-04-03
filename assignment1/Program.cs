@@ -61,9 +61,9 @@ namespace assignment1
                     case 2:
                         //Search For An Item
                         string searchQuery = userInterface.GetSearchQuery();
-                        string itemInformation = beverageCollection.FindById(searchQuery);
-                        if (itemInformation != null)
-                        userInterface.DisplayItemFound(itemInformation);
+                        string addItemInformation = beverageCollection.FindById(searchQuery);
+                        if (addItemInformation != null)
+                        userInterface.DisplayItemFound(addItemInformation);
                         break;
 
                     case 3:
@@ -88,8 +88,8 @@ namespace assignment1
                     case 4:
                         // remove an item
                         string IDToRemove = userInterface.RemoveByID();
-                        itemInformation = beverageCollection.FindById(IDToRemove);
-                        if (itemInformation != null)
+                        string removeItemInformation = beverageCollection.FindById(IDToRemove);
+                        if (removeItemInformation != null)
                         {
                             beverageCollection.RemoveByID(IDToRemove);
                         }
@@ -105,18 +105,26 @@ namespace assignment1
                         decimal updatePriceInformation = userInterface.GetNewPriceInformation();
                         bool updateActiveInformation = userInterface.GetNewActiveInformation();
 
-
-                        if (beverageCollection.FindById(updateBeverageInformation[0]) != null)
+                        try
                         {
                             beverageCollection.updateBeverage(updateBeverageInformation[0], updateBeverageInformation[1], updateBeverageInformation[2], updatePriceInformation, updateActiveInformation);
-                            //beverageCollection.updateBeverage("12345", "1", "1", 1, true);
-
-                            userInterface.DisplayAddWineItemSuccess();
                         }
-                        else
+                        catch
                         {
-                            userInterface.DisplayItemFoundError();
+                            userInterface.DisplayImportError();
                         }
+
+                        //if (beverageCollection.FindById(updateBeverageInformation[0]) != null)
+                        //{
+                        //    beverageCollection.updateBeverage(updateBeverageInformation[0], updateBeverageInformation[1], updateBeverageInformation[2], updatePriceInformation, updateActiveInformation);
+                        //    //beverageCollection.updateBeverage("12345", "1", "1", 1, true);
+
+                        //    userInterface.DisplayAddWineItemSuccess();
+                        //}
+                        //else
+                        //{
+                        //    userInterface.DisplayItemFoundError();
+                        //}
                         break;
                 }
 
