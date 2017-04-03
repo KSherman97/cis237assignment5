@@ -38,41 +38,27 @@ namespace assignment1
             //This is the 'primer' run of displaying and getting.
             int choice = userInterface.DisplayMenuAndGetResponse();
 
-            while (choice != 5)
+            while (choice != 6)
             {
                 switch (choice)
                 {
+
                     case 1:
-                        /**
-                        if (success)
-                        {
-                            //Display Success Message
-                            userInterface.DisplayImportSuccess();
-                        }
-                        else
-                        {
-                            //Display Fail Message
-                            userInterface.DisplayImportError();
-                        }
-                        **/
+                        //Print Entire List Of Items
+                        //Display all of the items
                         try
                         {
-                            beverageCollection.processLine();
+                            userInterface.DisplayAllItems(beverageCollection.GetPrintStringsForAllItems());
                             userInterface.DisplayImportSuccess();
                         }
                         catch
                         {
                             userInterface.DisplayImportError();
                         }
+
                         break;
 
                     case 2:
-                        //Print Entire List Of Items
-                        //Display all of the items
-                        userInterface.DisplayAllItems(beverageCollection.GetPrintStringsForAllItems());
-                        break;
-
-                    case 3:
                         //Search For An Item
                         string searchQuery = userInterface.GetSearchQuery();
                         string itemInformation = beverageCollection.FindById(searchQuery);
@@ -86,7 +72,7 @@ namespace assignment1
                         }
                         break;
 
-                    case 4:
+                    case 3:
                         //Add A New Item To The List
                         string[] newItemInformation = userInterface.GetNewItemInformation();
                         decimal newPriceInformation = userInterface.GetNewPriceInformation();
@@ -104,14 +90,12 @@ namespace assignment1
                             userInterface.DisplayItemAlreadyExistsError();
                         }
                         break;
-                    case 5:
-                        break;
 
-                    case 6:
+                    case 4:
                         beverageCollection.RemoveByID("12345");
                         break;
 
-                    case 7:
+                    case 5:
                         //Add A New Item To The List
                         string[] updateBeverageInformation = userInterface.GetUpdateItemInformation();
                         decimal updatePriceInformation = userInterface.GetNewPriceInformation();
