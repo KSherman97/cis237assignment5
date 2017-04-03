@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace assignment1
 {
-    class WineItemCollection : IWineCollection
+    class BeverageCollection : IWineCollection
     {
         //Private Variables
-        WineItem[] wineItems;
+        BeverageItem[] wineItems;
         int wineItemsLength;
 
         //Constuctor. Must pass the size of the collection.
-        public WineItemCollection(int size)
+        public BeverageCollection(int size)
         {
-            wineItems = new WineItem[size];
+            wineItems = new BeverageItem[size];
             wineItemsLength = 0;
         }
 
@@ -26,7 +26,7 @@ namespace assignment1
         public void AddNewItem(string id, string description, string pack)
         {
             //Add a new WineItem to the collection. Increase the Length variable.
-            wineItems[wineItemsLength] = new WineItem(id, description, pack);
+            wineItems[wineItemsLength] = new BeverageItem(id, description, pack);
             wineItemsLength++;
         }
         
@@ -42,7 +42,7 @@ namespace assignment1
             if (wineItemsLength > 0)
             {
                 //For each item in the collection
-                foreach (WineItem wineItem in wineItems)
+                foreach (BeverageItem wineItem in wineItems)
                 {
                     //if the current item is not null.
                     if (wineItem != null)
@@ -64,7 +64,7 @@ namespace assignment1
             string returnString = null;
 
             //For each WineItem in wineItems
-            foreach (WineItem wineItem in wineItems)
+            foreach (BeverageItem wineItem in wineItems)
             {
                 //If the wineItem is not null
                 if (wineItem != null)

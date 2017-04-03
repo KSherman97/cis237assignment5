@@ -31,7 +31,7 @@ namespace assignment1
             UserInterface userInterface = new UserInterface();
 
             //Create an instance of the WineItemCollection class
-            IWineCollection wineItemCollection = new WineItemCollection(wineItemCollectionSize);
+            IWineCollection wineItemCollection = new BeverageCollection(wineItemCollectionSize);
 
             //Create an instance of the CSVProcessor class
             CSVProcessor csvProcessor = new CSVProcessor();
