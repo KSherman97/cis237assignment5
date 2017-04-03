@@ -65,35 +65,20 @@ namespace assignment1
             }
 
         }
-        
+
         //Get The Print String Array For All Items
-        public string[] GetPrintStringsForAllItems()
+        public string GetPrintStringsForAllItems()
         {
-            //Create and array to hold all of the printed strings
-            string[] allItemStrings = new string[wineItemsLength];
-            //set a counter to be used
-            int counter = 0;
+            string output = string.Empty;
 
-            //If the wineItemsLength is greater than 0, create the array of strings
-            if (wineItemsLength > 0)
+            foreach (Beverage beverageItem in BeverageEntities.Beverages)
             {
-                //For each item in the collection
-                foreach (Beverage beverageItem in BeverageEntities.Beverages)
-                {
-                    //if the current item is not null.
-                    if (beverageItem != null)
-                    {
-                        //Add the results of calling ToString on the item to the string array.
-                        allItemStrings[counter] = ("Id: " + beverageItem.id + ", Description: " + beverageItem.name + ", Pack: " + beverageItem.pack + ", Price: " + beverageItem.price.ToString("c") + ", Active: " + beverageItem.active);
-                        counter++;
-
-                    }
-                }
+                output += "Id: " + beverageItem.id + ", Description: " + beverageItem.name + ", Pack: " + beverageItem.pack + ", Price: " + beverageItem.price.ToString("c") + ", Active: " + beverageItem.active + Environment.NewLine;
             }
-            //Return the array of item strings
-            return allItemStrings;
-        }
 
+            return output;
+
+        }
         //Find an item by it's Id
         public string FindById(string id)
         {
@@ -144,6 +129,29 @@ namespace assignment1
             {
                 Console.WriteLine("That car doesn't exist");
             }
+        }
+
+        public void updateBeverage(string id, string description, string pack, decimal price, bool active)
+        {
+            Beverage beverageToFindForUpdate = BeverageEntities.Beverages.Find(id);
+
+            // update some of the properties of the car we found
+            // all of them if we don't want to
+            if (beverageToFindForUpdate != null)
+            {
+                beverageToFindForUpdate.name = description;
+                beverageToFindForUpdate.pack = pack;
+                beverageToFindForUpdate.price = price;
+                beverageToFindForUpdate.active = active;
+
+                // save the new updates to the database. Since when we pulled out the one 
+                // to update, all we were really doing was getting a reference to the one in
+                // the collection we wanted to update, there is no need ot 'put' the car
+                // back into the cars collection. it is still there.
+                // all we have to do is save the changes.
+                BeverageEntities.SaveChanges();
+            }
+
         }
 
     }

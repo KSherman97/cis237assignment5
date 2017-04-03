@@ -79,17 +79,8 @@ namespace assignment1
 
                     case 2:
                         //Print Entire List Of Items
-                        string[] allItems = beverageCollection.GetPrintStringsForAllItems();
-                        if (allItems.Length > 0)
-                        {
-                            //Display all of the items
-                            userInterface.DisplayAllItems(allItems);
-                        }
-                        else
-                        {
-                            //Display error message for all items
-                            userInterface.DisplayAllItemsError();
-                        }
+                        //Display all of the items
+                        userInterface.DisplayAllItems(beverageCollection.GetPrintStringsForAllItems());
                         break;
 
                     case 3:
@@ -132,6 +123,21 @@ namespace assignment1
                         break;
 
                     case 7:
+                        //Add A New Item To The List
+                        string[] updateBeverageInformation = userInterface.GetUpdateItemInformation();
+                        decimal updatePriceInformation = userInterface.GetNewPriceInformation();
+                        bool updateActiveInformation = userInterface.GetNewActiveInformation();
+
+
+                        if (beverageCollection.FindById(updateBeverageInformation[0]) != null)
+                        {
+                            beverageCollection.updateBeverage(updateBeverageInformation[0], updateBeverageInformation[1], updateBeverageInformation[2], updatePriceInformation, updateActiveInformation);
+                            userInterface.DisplayAddWineItemSuccess();
+                        }
+                        else
+                        {
+                            userInterface.DisplayItemFoundError();
+                        }
                         break;
                 }
 

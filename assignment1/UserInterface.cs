@@ -78,6 +78,24 @@ namespace assignment1
             return new string[] { id, description, pack };
         }
 
+        public string[] GetUpdateItemInformation()
+        {
+            Console.WriteLine();
+            Console.WriteLine("What is the items Id to update?");
+            Console.Write("> ");
+            string id = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("What is the updated items Description?");
+            Console.Write("> ");
+            string description = Console.ReadLine();
+            Console.WriteLine("What is the updated items Pack?");
+            Console.Write("> ");
+            string pack = Console.ReadLine();
+
+
+            return new string[] {id, description, pack };
+        }
+
         public decimal GetNewPriceInformation()
         {
             Console.WriteLine("What is the new items Price?");
@@ -116,13 +134,14 @@ namespace assignment1
         }
 
         //Display All Items
-        public void DisplayAllItems(string[] allItemsOutput)
+        public void DisplayAllItems(string allItemsOutput)
         {
-            Console.WriteLine();
-            foreach (string itemOutput in allItemsOutput)
-            {
-                Console.WriteLine(itemOutput);
-            }
+            Console.WriteLine(allItemsOutput);
+            //Console.WriteLine();
+            //foreach (string itemOutput in allItemsOutput)
+            //{
+            //     Console.WriteLine(itemOutput);
+            // }
         }
 
         //Display All Items Error
